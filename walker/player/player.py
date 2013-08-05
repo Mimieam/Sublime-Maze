@@ -9,17 +9,18 @@ gV = Walker.walker.config.gV
 class Player(object):
     """docstring for Player"""
     def __init__(self, view):
-        # super(Player, self).__init__()
-        # self.arg = arg
-        self.view = view
 
-    def _next_point(self,direction,curX,CurY):
+        self.view = view
+        self.pos = [2, 2]
+        self.prev_pos = self.pos
+
+    def _next_point(self,direction,curX,curY):
         
         if gV['WALKER_ON']:
             gV['SCORE'] = gV['SCORE'] + 1
 
             # Get position of next point
-            newPosX, newPosY = (curX,CurY)
+            newPosX, newPosY = (curX,curY)
             if direction == "right": newPosY = newPosY +1
             elif direction == "left": newPosY = newPosY-1
             elif direction == "up": newPosX = newPosX-1
@@ -28,31 +29,58 @@ class Player(object):
             gV['DIRECTION'] = direction
             newPoint = self.view.text_point(newPosX, newPosY)
 
-            return newPoint
-        # snakeView.show_at_center(newPoint)
-        # eatenChar = snakeView.substr(newPoint)
+            # if self.is_wall(newPoint):
+            #     print ("Face in Wall")
+            #     return self.view.text_point(curX,curY)
+            # else:
+            #     return newPoint
+
+    #accept pt from .text_point(xp,yp)
+    def is_wall(self, pt):
+
+            char = self.view.substr(pt)
+            print ('|',char,'|')
+            if char in [']','[','\n','\t'] :
+                return True 
+            else :
+                return False
         
         # lineOrChar - move by line or charactere - sublime way of moving cursor
         # tof - true or false
     def on_move(self,edit ,direction, head,lineOrChar, tof):
             
-        # for x in self:
         cur_position = self.view.sel()[0]
-        # current_line = self.view.line(cur_position)
         curX,curY = self.view.rowcol(cur_position.begin())
 
         curPos= cur_position.begin()
         nextPos = self._next_point(direction, curX, curY)
-        print ("dir",direction, 'cur ',curPos,' next',nextPos)
-        # c_row, c_col = self.view.rowcol(cur_position.begin())
 
-        frontCursor = sublime.Region(nextPos-1, nextPos)
-        backCursor = sublime.Region(curPos-2, curPos)
-        #move the head by 1
-        self.view.replace(edit, frontCursor, head)
+        # don't update the position if we hit a wall
+        if self.is_wall(nextPos):
+            print ("Face in Wall")
+            return self.view.text_point(curX,curY)
+        else:
+            print ("dir",direction, 'cur ',curPos,' next',nextPos)
+
+            frontCursor = sublime.Region(nextPos-1, nextPos)
+            backCursor = sublime.Region(curPos-2, curPos)
+            #move the head by 1
+            self.view.replace(edit, frontCursor, head)
+
+            #set active cursor at the starting position        
+            pt = self.view.text_point(curX , curY)
+            self.view.sel().clear()
+            self.view.sel().add(sublime.Region(pt))
+
+
+            # return newPoint
         #delete the trail 
         # self.view.replace(edit, backCursor, " ")
 
-        print ('moving ', lineOrChar, 'tof', tof)
-        self.view.run_command("move", {"by": lineOrChar,"forward": tof })
+            # print ('moving ', lineOrChar, 'tof', tof)
+            self.view.run_command("move", {"by": lineOrChar,"forward": tof })
 
+    def _starting_at(self):
+
+        return self.pos
+        

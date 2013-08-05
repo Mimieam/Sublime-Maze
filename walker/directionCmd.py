@@ -12,22 +12,17 @@ class ClientPlayer(Player):
     """docstring for ClientPlayer"""
     def __init__(self, view):
         super(ClientPlayer, self).__init__(view)
-        # self.arg = arg
-        self.name = ""
-        self.score = gV['SCORE']
         gV['Client'] = self
-        # print(gV['Client'])
-        # player.Player.__init__(self)
+        self.score = gV['SCORE']
 
-    def function(self):
-        pass
+    def starting_at(self):
+        return self._starting_at()
+
 
 # OVERWRITE ARROW KEYS - but pass through to old commands
 class go_right_cmd(sublime_plugin.TextCommand):
     def run(self, edit):
 
-        print(self.view.name())
-        # if gV['DIRECTION'] != 'left':
         gV['INTENDED_DIRECTION'] = 'right'
         print ('right Key pressed', gV['INTENDED_DIRECTION'])
 
@@ -40,7 +35,7 @@ class go_right_cmd(sublime_plugin.TextCommand):
 
 class go_left_cmd(sublime_plugin.TextCommand):
     def run(self, edit):
-        # if gV['DIRECTION'] != 'right':
+
         gV['INTENDED_DIRECTION'] = 'left'
         print ('left Key pressed', gV['INTENDED_DIRECTION'])
 
@@ -55,7 +50,6 @@ class go_left_cmd(sublime_plugin.TextCommand):
 class go_up_cmd(sublime_plugin.TextCommand):
     def run(self, edit):
 
-        # if gV['DIRECTION'] != 'down':
         gV['INTENDED_DIRECTION'] = 'up'
         print ('up Key pressed', gV['G_UP'])
 
@@ -69,7 +63,7 @@ class go_up_cmd(sublime_plugin.TextCommand):
 class go_down_cmd(sublime_plugin.TextCommand):
     def run(self, edit):
         # gV['WALKER_ON']=False  # kick loop shutdown <---- REMOVE THIS ASAP
-            # if gV['DIRECTION'] != 'up':
+
         gV['INTENDED_DIRECTION'] = 'down'
         print ('down Key pressed', gV['G_DOWN'])
 

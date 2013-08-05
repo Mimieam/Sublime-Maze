@@ -8,6 +8,7 @@ from imp import reload
 
 import Walker.walker.player
 import Walker.walker.config
+import Walker.helper
 
 
 gV = Walker.walker.config.gV
@@ -33,102 +34,72 @@ class WalkerWindow(sublime_plugin.WindowCommand):
         
 
 class WalkerCommand(sublime_plugin.TextCommand):
-    # def __init__(self):
 
     def run(self, edit):
         self.edit = edit
 
         if gV['WALKER_ON'] == False:
             gV['WALKER_ON'] = True
-            # print('Test gV')            
-            # view = sublime.Window.open_file(self,'Walk')
-            # views =  sublime.active_window().open_file(self,'Walk.txt')
-            # view = WalkerWindow(self)
-            # print(view.getFiles())
-            # for v in view:
-            # views =  sublime.active_window().views()
-            # view = None
-            # for x in views:
-            #     print (x.id(), " name ", x.name())
-            #     if x.name() == "Walk":
-            #        view = x 
 
-            # print('view', view)       
-            # if view is None:
             view = sublime.active_window().new_file()
             view.set_scratch(True)
             view.set_name("Walk")
-            gV['View']=view
-            # else:
-                # self.focus_view(view)
-                
+            self.view = gV['View']=view
 
-            # view = self.view
             walker = ClientPlayer(view)
-            # walker.on_move(edit,'left',SNAKE_HEAD)
-            # print(gV['Client'])
-            # selections = self.view.sel()
-            # for selection in selections:
             cur_position = view.sel()[0]
-            # current_line = view.line(cur_position)
-            # c_row,c_col = view.rowcol(cur_position.begin())
-
-            view.insert(edit, cur_position.a, """
-I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I 
-I               I           I       I               I       I   I               I 
-I   I I I   I I I   I I I   I   I   I I I I I   I   I   I   I   I   I   I I I   I 
-I       I               I   I   I               I       I   I       I   I       I 
-I   I I I I I I I I I I I   I   I I I I I I I I I I I I I   I   I I I   I I I   I 
-I   I       I               I       I           I   I       I   I   I       I   I 
-I   I   I   I   I I I   I I I I I   I   I   I   I   I   I I I   I   I I I   I   I 
-I   I   I   I       I   I           I   I   I       I   I   I           I   I   I 
-I   I   I   I I I   I   I   I   I I I I I   I I I I I   I   I   I I I I I   I   I 
-I   I   I           I   I   I   I       I               I       I       I   I   I 
-I   I   I I I I I I I I I   I   I   I   I I I   I I I I I   I I I   I   I   I   I 
-I   I   I               I   I   I   I   I   I           I   I       I   I   I   I 
-I   I   I   I I I I I   I   I   I   I   I   I I I I I   I I I   I I I   I   I I I 
-I   I       I       I   I   I   I   I       I       I           I   I   I       I 
-I   I I I I I   I I I   I   I I I   I I I I I   I   I I I I I I I   I   I I I   I 
-I       I       I       I           I           I   I               I           I 
-I I I   I   I   I   I I I I I I I I I   I I I I I   I   I I I I I   I I I I I   I 
-I   I   I   I   I           I           I       I       I       I   I       I   I 
-I   I   I   I   I I I   I I I   I   I I I   I   I I I I I   I   I I I   I   I   I 
-I           I       I           I           I               I           I       I 
-I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I 
+            view.insert(edit, cur_position.a, 
+"""[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[]                  []                          []                              []
+[]  [][][][][][][]  []  [][][][][][][][][]  [][][]  [][][]  [][][][][][][][][]  []
+[]      []  []      []  []          []      []      []      []              []  []
+[]  []  []  []  [][][]  []  [][][]  []  [][][]  [][][]  [][][]  [][][][][]  []  []
+[]  []  []              []      []  []      []      []  []      []          []  []
+[]  []  [][][][][]  [][][][][]  []  [][][][][]  [][][]  []  [][][][][][][][][]  []
+[]  []      []      []          []              []      []                  []  []
+[]  [][][]  []  [][][]  [][][][][][][][][][][][][]  [][][]  [][][][][][][]  []  []
+[]  []      []  []  []  []      []          []      []      []      []      []  []
+[][][]  [][][]  []  []  []  []  []  [][][]  []  [][][]  [][][]  [][][]  []  []  []
+[]      []          []      []  []  []  []  []      []  []          []  []  []  []
+[]  [][][][][][][]  [][][][][]  []  []  [][][][][]  []  [][][][][]  []  [][][]  []
+[]              []  []          []  []              []              []  []      []
+[]  [][][][][]  [][][]  [][][][][]  []  [][][][][][][][][][][][][][][]  []  [][][]
+[]      []  []          []      []  []  []              []              []  []  []
+[][][]  []  [][][][][][][][][]  []  []  []  [][][][][]  []  [][][][][][][]  []  []
+[]      []                      []  []              []  []  []          []  []  []
+[]  [][][]  [][][][][][][][][]  []  [][][][][][][][][]  []  []  [][][]  []  []  []
+[]          []                  []                      []          []          []
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
 """)
-            # print ('cur_p ',cur_position, 'current_line', current_line, 'col ',c_col+1,'row ',c_row+1, 'edit ',edit)
- 
-            # view.run_command("move", {"by": "characters","forward": False })
+            xStart, yStart = walker.starting_at()
+            print (xStart , yStart)
+            self.draw_at("S",xStart, yStart)
 
-            # region = sublime.Region(cur_position.a+1, cur_position.b + 2)
-            # view.replace(edit, region, u"\u25CF")
+            #set active cursor at the starting position        
+            pt = self.view.text_point(xStart , yStart)
+            self.view.sel().clear()
+            self.view.sel().add(sublime.Region(pt))
 
-            # start snake update timeout loop
-            # sublime.set_timeout(lambda: self.animatedStuff(view,edit,
-            #                                         'w',
-            #                                         0,
-            #                                         5), 500)
-            # stuff = animatedStuff(view)
-            # sublime.set_timeout(lambda: self.animate(view,edit,'w', 0, 5),1000)
-            self.animate(view,edit,'w', 10, 5)
+            # self.view.show(pt)
+
+
         else:
             gV['WALKER_ON'] = False
             gV['DIRECTION'] = "right"
 
-    # def gameOver():
+    def gameOver():
 
-    #     sublime.error_message("Game Over!\nYour SNAKE_SCORE was: " +
-    #                           str(gV['SCORE']))
-    #     gV['WALKER_ON'] = False 
+        sublime.error_message("Game Over!\nYour SNAKE_SCORE was: " + str(gV['SCORE']))
+        gV['WALKER_ON'] = False 
 
 
-    # def reset(self,edit):
+    def reset(self,edit):
 
-    #     # reset stuff
-    #     gV['SCORE'] = 0
-    #     gV['DIRECTION'] = "right"
-    #     gV['INTENDED_DIRECTION'] = "right"
-    #     gV['ANIMATION_SWITCH'] =True
+        # reset stuff
+        gV['SCORE'] = 0
+        gV['DIRECTION'] = "right"
+        gV['INTENDED_DIRECTION'] = "right"
+        gV['ANIMATION_SWITCH'] =True
 
     def animate (self, view,edit,head,pos,length):
         if gV['WALKER_ON']:
@@ -147,6 +118,22 @@ I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I 
             print ('passed')
             sublime.set_timeout(lambda: self.animate(view,edit,'w', pos, 3),2000)
 
+    #give credit where it is due : chat_at & draw_at where take from this repo : https://github.com/miningold/Traverse/blob/master/Traverse.py
+    # Get character at position in vector or x,y form
+    def char_at(self, xpos, ypos=None):
+        if ypos is None:
+            return self.char_at(xpos[0], xpos[1])
+
+        return self.view.substr(self.view.text_point(ypos, xpos))
+
+    # Draw character at position in vector or x,y form
+    def draw_at(self, char, xpos, ypos=None):
+        if ypos is None:
+            return self.draw_at(char, xpos[0], xpos[1])
+
+        pt = self.view.text_point(ypos, xpos)
+        self.view.replace(self.edit, sublime.Region(pt, pt + 1), char)
+
 class ReplaceEditCommand(sublime_plugin.TextCommand):
 
     def run(self, edit, view, pos,length,head):
@@ -154,5 +141,5 @@ class ReplaceEditCommand(sublime_plugin.TextCommand):
         reg2 = sublime.Region(pos+length, pos+length*2)
         view = gV['View']
         view.replace(edit, reg, head) 
-        view.insert(edit, reg2, '- ') 
+        # view.insert(edit, reg2, '- ') 
         
