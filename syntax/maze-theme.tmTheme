@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>Maze-game</string>
+	<key>settings</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>Wall</string>
+			<key>scope</key>
+			<string>entity.wall</string>
+			<key>settings</key>
+			<dict>
+				<key>background</key>
+				<string>#171822</string>
+				<key>foreground</key>
+				<string>#686E6A</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Player</string>
+			<key>scope</key>
+			<string>entity.player</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#686E6A</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Startpt</string>
+			<key>scope</key>
+			<string>entity.startpt</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#A2EF4E</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Endpt</string>
+			<key>scope</key>
+			<string>entity.endpt</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#FFA312</string>
+			</dict>
+		</dict>
+	</array>
+	<key>uuid</key>
+	<string>b6413f16-0aab-4084-8235-0c26d326f05f</string>
+</dict>
+</plist>

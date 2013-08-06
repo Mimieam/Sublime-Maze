@@ -1,9 +1,10 @@
 import sublime
 import sublime_plugin
-
+# 
 import sys,logging
 from imp import reload
 
+from  Walker.walker.maze import makeMaze, mazeString
 import Walker.walker.player
 import Walker.walker.config
 import Walker.helper
@@ -47,30 +48,21 @@ class WalkerCommand(sublime_plugin.TextCommand):
             #load the maze color syntax
             self.view.set_syntax_file("Packages/Walker/maze.tmLanguage")
 
+            # Entry point of our script
+             
+            # Make the 2D array filled with a maze of 1's and 0's
+            self.maze = makeMaze(30,15)
+             
+            # Print that maze to the console
+            mazestr =  (mazeString(self.maze, (u"[]", "  ")))
+
             walker = ClientPlayer(view)
             cur_position = view.sel()[0]
-            view.insert(edit, cur_position.a, 
-"""[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[]                  []                          []                              []
-[]  [][][][][][][]  []  [][][][][][][][][]  [][][]  [][][]  [][][][][][][][][]  []
-[]      []  []      []  []          []      []      []      []              []  []
-[]  []  []  []  [][][]  []  [][][]  []  [][][]  [][][]  [][][]  [][][][][]  []  []
-[]  []  []              []      []  []      []      []  []      []          []  []
-[]  []  [][][][][]  [][][][][]  []  [][][][][]  [][][]  []  [][][][][][][][][]  []
-[]  []      []      []          []              []      []                  []  []
-[]  [][][]  []  [][][]  [][][][][][][][][][][][][]  [][][]  [][][][][][][]  []  []
-[]  []      []  []  []  []      []          []      []      []      []      []  []
-[][][]  [][][]  []  []  []  []  []  [][][]  []  [][][]  [][][]  [][][]  []  []  []
-[]      []          []      []  []  []  []  []      []  []          []  []  []  []
-[]  [][][][][][][]  [][][][][]  []  []  [][][][][]  []  [][][][][]  []  [][][]  []
-[]              []  []          []  []              []              []  []      []
-[]  [][][][][]  [][][]  [][][][][]  []  [][][][][][][][][][][][][][][]  []  [][][]
-[]      []  []          []      []  []  []              []              []  []  []
-[][][]  []  [][][][][][][][][]  []  []  []  [][][][][]  []  [][][][][][][]  []  []
-[]      []                      []  []              []  []  []          []  []  []
-[]  [][][]  [][][][][][][][][]  []  [][][][][][][][][]  []  []  [][][]  []  []  []
-[]          []                  []                      []          []          []
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]""")
+
+            #generate the add the maze to the view
+            view.insert(edit, cur_position.a, mazestr)
+
+            # add the starting point 
             xStart, yStart = walker.starting_at()
             print (xStart , yStart)
             self.draw_at("S",xStart, yStart)
@@ -86,7 +78,7 @@ class WalkerCommand(sublime_plugin.TextCommand):
 
     def gameOver():
 
-        sublime.error_message("Game Over!\nYour SNAKE_SCORE was: " + str(gV['SCORE']))
+        sublime.error_message("Game Over!\nYour SCORE was: " + str(gV['SCORE']))
         gV['WALKER_ON'] = False 
 
 

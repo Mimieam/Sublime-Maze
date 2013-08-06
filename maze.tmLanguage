@@ -17,13 +17,6 @@
 			<string>\[\]</string>
 			<key>name</key>
 			<string>entity.wall.mzl</string>
-			<key>settings</key>
-			<dict>
-				<key>fontStyle</key>
-				<string></string>
-				<key>foreground</key>
-				<string>#a6e22e</string>
-			</dict>
 		</dict>
 		<dict>
 			<key>comment</key>
@@ -31,7 +24,7 @@
 			<key>match</key>
 			<string>[\u25C4,\u25BA,\u25B2,\u25BC]</string>
 			<key>name</key>
-			<string>keyword.source.mzl</string>
+			<string>entity.player.mzl</string>
 		</dict>
 		<dict>
 			<key>comment</key>

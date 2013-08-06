@@ -1,0 +1,55 @@
+{
+    "name": "Maze-game", 
+    "settings": [
+        {
+            "name": "Wall",
+            "scope": "entity.wall", 
+            "settings": {
+                "foreground": "#686E6A",
+                "background": "#171822"
+            }
+        }, 
+        {
+            "name": "Player", 
+            "scope": "entity.player", 
+            "settings": {
+                "foreground": "#686E6A"
+            }
+        }, 
+        {
+            "name": "Startpt", 
+            "scope": "entity.startpt", 
+            "settings": {
+                "foreground": "#A2EF4E"
+            }
+        }, 
+        {
+            "name": "Endpt", 
+            "scope": "entity.endpt", 
+            "settings": {
+                "foreground": "#FFA312"
+            }
+        }
+    ], 
+    "uuid": "b6413f16-0aab-4084-8235-0c26d326f05f"
+}
+
+        // {
+        //     "settings": {
+        //         "activeGuide": "#9D550FB0", 
+        //         "background": "#171822", 
+        //         "bracketContentsForeground": "#F8F8F2A5", 
+        //         "bracketContentsOptions": "underline", 
+        //         "bracketsForeground": "#F8F8F2A5", 
+        //         "bracketsOptions": "underline", 
+        //         "caret": "#F8F8F0", 
+        //         "findHighlight": "#FFE792", 
+        //         "findHighlightForeground": "#000000", 
+        //         "foreground": "#F8F8F2", 
+        //         "invisibles": "#3B3A32", 
+        //         "lineHighlight": "#3E3D32", 
+        //         "selection": "#49483E", 
+        //         "selectionBorder": "#222218", 
+        //         "tagsOptions": "stippled_underline"
+        //     }
+        // }, 

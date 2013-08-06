@@ -1,0 +1,35 @@
+{
+    "name": "Maze-game", 
+    "settings": [
+        {
+            "name": "Wall",
+            "scope": "entity.wall", 
+            "settings": {
+                "foreground": "#686E6A",
+                "background": "#171822"
+            }
+        }, 
+        {
+            "name": "Player", 
+            "scope": "entity.player", 
+            "settings": {
+                "foreground": "#686E6A"
+            }
+        }, 
+        {
+            "name": "Startpt", 
+            "scope": "entity.startpt", 
+            "settings": {
+                "foreground": "#A2EF4E"
+            }
+        }, 
+        {
+            "name": "Endpt", 
+            "scope": "entity.endpt", 
+            "settings": {
+                "foreground": "#FFA312"
+            }
+        }
+    ], 
+    "uuid": "b6413f16-0aab-4084-8235-0c26d326f05f"
+}
