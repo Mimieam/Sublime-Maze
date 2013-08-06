@@ -23,12 +23,16 @@ To start the maze :
   Go to `Tool>Command Palette` and select `Maze Game: Start`
 or use the shortcut `[SHIFT]+[ALT]+[M]`
 
-
+## Screenshot
+![alt text][img]
 
 ## Future Improvement
- - add some coloring
- - add maze generator
+ - add some coloring 
+ - add maze generator (done)
  - persistent scoring 
+ - timer 
+ - things to pick up for extra points
+ - multiplayer race mode... in a long distant future 
 
 
 ## Acknowledgments 
@@ -41,4 +45,5 @@ Don't hesitate to contact me with feedbacks or ideas, Thanks
 
 
 [logo]:  http://i.imgur.com/ixewzze.gif "Sublime-Maze" 
+[img]: http://i.imgur.com/dQ3eqIr.png "demo"
 [alt text]: Sublime-Maze
