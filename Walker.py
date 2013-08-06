@@ -1,10 +1,8 @@
 import sublime
 import sublime_plugin
 
-
-import sys
+import sys,logging
 from imp import reload
-# import imp
 
 import Walker.walker.player
 import Walker.walker.config
@@ -43,8 +41,11 @@ class WalkerCommand(sublime_plugin.TextCommand):
 
             view = sublime.active_window().new_file()
             view.set_scratch(True)
-            view.set_name("Walk")
+            view.set_name("Walk.mzl")
             self.view = gV['View']=view
+
+            #load the maze color syntax
+            self.view.set_syntax_file("Packages/Walker/maze.tmLanguage")
 
             walker = ClientPlayer(view)
             cur_position = view.sel()[0]
@@ -69,8 +70,7 @@ class WalkerCommand(sublime_plugin.TextCommand):
 []      []                      []  []              []  []  []          []  []  []
 []  [][][]  [][][][][][][][][]  []  [][][][][][][][][]  []  []  [][][]  []  []  []
 []          []                  []                      []          []          []
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-""")
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]""")
             xStart, yStart = walker.starting_at()
             print (xStart , yStart)
             self.draw_at("S",xStart, yStart)
@@ -79,9 +79,6 @@ class WalkerCommand(sublime_plugin.TextCommand):
             pt = self.view.text_point(xStart , yStart)
             self.view.sel().clear()
             self.view.sel().add(sublime.Region(pt))
-
-            # self.view.show(pt)
-
 
         else:
             gV['WALKER_ON'] = False

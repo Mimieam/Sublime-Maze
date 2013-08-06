@@ -1,0 +1,24 @@
+{
+	"name": "Sublime Maze",
+	"scopeName": "source.mzl",
+	"fileTypes": ["mzl"],
+	"patterns": [
+		{ "match": "\\[\\]",
+          "name": "string.double.mzl",
+          "comment": "This pattern matches the walls of the maze"
+        },		
+        { "match": "[\\u25C4,\\u25BA,\\u25B2,\\u25BC]",
+          "name": "constant.numeric.mzl",
+          "comment": "This pattern matches the player charactere"
+        },
+        { "match": "[ \\u2123 ]",
+          "name": "string.double.mzl",
+          "comment": "This pattern matches the Start point of a maze"
+        },        
+        { "match": "[ \\u2134 ]",
+          "name": "support.class.mzl",
+          "comment": "This pattern matches the End point of a maze"
+        } 
+	],
+	"uuid": "b6413f16-0aab-4084-8235-0c26d326f05f"
+}

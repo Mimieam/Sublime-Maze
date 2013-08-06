@@ -1,5 +1,5 @@
 [
- 	{ "keys": ["ctrl+shift+alt+w"], "command": "walker" },
+ 	{ "keys": ["shift+alt+m"], "command": "walker" },
 
 	{ "keys": ["left"], "command": "go_left_cmd" },
 	{ "keys": ["right"], "command": "go_right_cmd" },

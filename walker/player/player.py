@@ -26,21 +26,21 @@ class Player(object):
             elif direction == "up": newPosX = newPosX-1
             else: newPosX = newPosX +1
 
-            gV['DIRECTION'] = direction
+           
             newPoint = self.view.text_point(newPosX, newPosY)
 
-            # if self.is_wall(newPoint):
-            #     print ("Face in Wall")
-            #     return self.view.text_point(curX,curY)
-            # else:
-            #     return newPoint
+            if self.is_wall(newPoint):
+                print ("Face in Wall")
+                return self.view.text_point(curX,curY)
+            else:
+                return newPoint
 
     #accept pt from .text_point(xp,yp)
     def is_wall(self, pt):
-
+            print ('pt ',pt)
             char = self.view.substr(pt)
             print ('|',char,'|')
-            if char in [']','[','\n','\t'] :
+            if char in [']','[','\n','\t','\r']:
                 return True 
             else :
                 return False
@@ -48,39 +48,59 @@ class Player(object):
         # lineOrChar - move by line or charactere - sublime way of moving cursor
         # tof - true or false
     def on_move(self,edit ,direction, head,lineOrChar, tof):
-            
+         
+        #get current position   
         cur_position = self.view.sel()[0]
         curX,curY = self.view.rowcol(cur_position.begin())
-
         curPos= cur_position.begin()
-        nextPos = self._next_point(direction, curX, curY)
 
+        #get next position from direction
+        nextPos = self._next_point(direction, curX, curY)
         # don't update the position if we hit a wall
         if self.is_wall(nextPos):
             print ("Face in Wall")
-            return self.view.text_point(curX,curY)
-        else:
-            print ("dir",direction, 'cur ',curPos,' next',nextPos)
+            # keep cursor at same position and don't update anything         
+            # oldPt = self.view.text_point(curX , curY)
+            # self.view.sel().clear()
+            self.view.sel().add(sublime.Region(curPos))
 
-            frontCursor = sublime.Region(nextPos-1, nextPos)
-            backCursor = sublime.Region(curPos-2, curPos)
+        else:
+            
+            print ("direction: ",direction, ' prev= ',gV['PP'],' cur= ',curPos,' next= ',nextPos)
+            
+            # frontCursor = sublime.Region(nextPos-1, nextPos)
+            frontCursor = sublime.Region(curPos, curPos+1)
+            #backCursor = sublime.Region(curPos-2, curPos)
             #move the head by 1
             self.view.replace(edit, frontCursor, head)
 
-            #set active cursor at the starting position        
-            pt = self.view.text_point(curX , curY)
-            self.view.sel().clear()
-            self.view.sel().add(sublime.Region(pt))
-
-
             # return newPoint
-        #delete the trail 
-        # self.view.replace(edit, backCursor, " ")
+            #delete the tail 
+            # self.view.replace(edit, backCursor, " ")
 
-            # print ('moving ', lineOrChar, 'tof', tof)
-            self.view.run_command("move", {"by": lineOrChar,"forward": tof })
+            #if we are going left, the cursor need to be adjusted
+            # if direction == "left":
+            #     cursorPos = self.view.text_point(curX , curY-1)
+            #     self.view.sel().clear()
+            #     self.view.sel().add(sublime.Region(cursorPos))
+            self._move_to(nextPos)
+            # self.view.run_command("move", {"by": lineOrChar,"forward": tof })
+            
+            # set the current position as previous one since we didn't hit a wall
+            gV['PP'] = curPos
+            gV['DIRECTION'] = direction
 
     def _starting_at(self):
 
         return self.pos
+
+    def _move_to (self,to=None,X=None,Y=None):
+        if X is not None:
+            pt = self.view.text_point(X , Y)
+        else:
+            pt = to
+
+        self.view.sel().clear()
+        self.view.sel().add(sublime.Region(pt))
+
         

@@ -10,5 +10,6 @@ gV = {
     'G_LEFT'	: u"\u25C4",
     'G_RIGHT'	: u"\u25BA",
     'G_UP'		: u"\u25B2",
-    'G_DOWN'	: u"\u25BC"
+    'G_DOWN'	: u"\u25BC",
+    'PP'        : [0,0]
 }
