@@ -3,7 +3,6 @@
 gV = {
     'DIRECTION' : 'right',
     'INTENDED_DIRECTION' : 'right',
-    'HEAD' : u"\u25CF",
     'WALKER_ON' : False,
     'SCORE': 0,
     'ANIMATION_SWITCH':False,
@@ -13,3 +12,16 @@ gV = {
     'G_DOWN'	: u"\u25BC",
     'PP'        : [0,0]
 }
+ 
+keymap_default = "[\
+    { \"keys\": [\"shift+alt+m\"], \"command\": \"walker\" }\
+]"
+
+keymap_maze ="[\
+    { \"keys\": [\"shift+alt+m\"], \"command\": \"walker\" },\
+    { \"keys\": [\"left\"], \"command\": \"go_left_cmd\" },\
+    { \"keys\": [\"right\"], \"command\": \"go_right_cmd\" },\
+    { \"keys\": [\"up\"], \"command\": \"go_up_cmd\" },\
+    { \"keys\": [\"down\"], \"command\": \"go_down_cmd\" }\
+]\
+"

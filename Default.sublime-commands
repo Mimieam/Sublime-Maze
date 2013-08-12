@@ -1,6 +1,6 @@
 [
     {
         "caption": "Maze game: Start",
-        "command": "walker"
+        "command": "maze_start"
     }
 ]

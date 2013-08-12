@@ -8,31 +8,31 @@
         "id": "package-settings",
         "children": [
           {
-            "caption": "IRC",
+            "caption": "Maze-game",
             "children": [
               {
                 "command": "open_file",
-                "args": {"file": "${packages}/IRC/IRC.sublime-settings"},
+                "args": {"file": "${packages}/Maze/Maze.sublime-settings"},
                 "caption": "Settings – Default"
               },
               {
                 "command": "open_file",
-                "args": {"file": "${packages}/User/IRC.sublime-settings"},
+                "args": {"file": "${packages}/User/Maze.sublime-settings"},
                 "caption": "Settings – User"
               },
               {
                 "command": "open_file",
-                "args": {"file": "${packages}/IRC/Default.sublime-commands"},
+                "args": {"file": "${packages}/Maze/Default.sublime-commands"},
                 "caption": "Commands – Default"
               },
               {
                 "command": "open_file",
-                "args": {"file": "${packages}/User/IRC.sublime-commands"},
+                "args": {"file": "${packages}/User/Maze.sublime-commands"},
                 "caption": "Commands – User"
               },
               {
                 "command": "open_file",
-                "args": {"file": "${packages}/User/IRC/syntax/IRC.tmLanguage"},
+                "args": {"file": "${packages}/User/Maze/syntax/Maze.tmLanguage"},
                 "caption": "Syntax – User"
               }
             ]

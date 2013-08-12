@@ -1,10 +1,11 @@
 # player.py
 import sublime
 import sublime_plugin
+from Walker.edit import Edit 
 
 import Walker.walker.config
 gV = Walker.walker.config.gV
-
+# from Walker.Maze import on_move_wrapper
 
 class Player(object):
     """docstring for Player"""
@@ -13,6 +14,9 @@ class Player(object):
         self.view = view
         self.pos = [2, 2]
         self.prev_pos = self.pos
+
+    def run(self, view):
+        self.__init__(view)
 
     def _next_point(self,direction,curX,curY):
         
@@ -26,7 +30,7 @@ class Player(object):
             elif direction == "up": newPosX = newPosX-1
             else: newPosX = newPosX +1
 
-           
+            
             newPoint = self.view.text_point(newPosX, newPosY)
 
             if self.is_wall(newPoint):
@@ -44,52 +48,67 @@ class Player(object):
                 return True 
             else :
                 return False
-        
+
+
+    def walked_on_something(self,pt):
+            print ('pt ',pt)
+            char = self.view.substr(pt)
+            if char in ['_']:
+                self.gameOver()
+
+
+    def gameOver(self):
+
+        sublime.error_message("Your SCORE was: " + str(gV['SCORE']))
+        gV['WALKER_ON'] = False 
+
+
         # lineOrChar - move by line or charactere - sublime way of moving cursor
         # tof - true or false
     def on_move(self,edit ,direction, head,lineOrChar, tof):
-         
-        #get current position   
-        cur_position = self.view.sel()[0]
-        curX,curY = self.view.rowcol(cur_position.begin())
-        curPos= cur_position.begin()
+        if gV['WALKER_ON']:
+            self.on_move_wrapper(self,edit ,direction, head,lineOrChar, tof)
+        # sublime.set_timeout(lambda:self.on_move_wrapper(self,edit ,direction, head,lineOrChar, tof) ,100)
+        # # for x in self:
+        # #     print(self[x])         
+        # #get current position   
+        # cur_position = self.view.sel()[0]
+        # curX,curY = self.view.rowcol(cur_position.begin())
+        # curPos= cur_position.begin()
 
-        #get next position from direction
-        nextPos = self._next_point(direction, curX, curY)
-        # don't update the position if we hit a wall
-        if self.is_wall(nextPos):
-            print ("Face in Wall")
-            # keep cursor at same position and don't update anything         
-            # oldPt = self.view.text_point(curX , curY)
-            # self.view.sel().clear()
-            self.view.sel().add(sublime.Region(curPos))
+        # #get next position from direction
+        # nextPos = self._next_point(direction, curX, curY)
+        # # don't update the position if we hit a wall
 
-        else:
+        # if self.is_wall(nextPos):
+        #     print ("Face in Wall")
+        #     # keep cursor at same position and don't update anything         
+        #     self.view.sel().add(sublime.Region(curPos))
+
+        # else:
             
-            print ("direction: ",direction, ' prev= ',gV['PP'],' cur= ',curPos,' next= ',nextPos)
+        #     frontCursor = sublime.Region(curPos, curPos+1)
+        #     #move the head by 1
+        #     # self.view.replace(edit, frontCursor, head)
+        #     # self.view.run_command("replace_edit" ,{"pos":frontCursor, "length":10, "content":'>'})
+        #     with Edit(self.view) as edit:
+        #         edit.replace(frontCursor, head)
+        #         # edit.insert(0, 'more stuff\n')
+        #     # self.view.run_command("move", {  "by": "characters",  "forward": True  })
+        #     # self.view.run_command("r_edit")
+        #     #delete the tail 
+        #     # self.view.replace(edit, backCursor, " ")
+
+        #     self._move_to(nextPos)
+        #     print('test 1',frontCursor)
+        #     self.walked_on_something(nextPos)
+        #     # self.view.run_command("move", {"by": lineOrChar,"forward": tof })
             
-            # frontCursor = sublime.Region(nextPos-1, nextPos)
-            frontCursor = sublime.Region(curPos, curPos+1)
-            #backCursor = sublime.Region(curPos-2, curPos)
-            #move the head by 1
-            self.view.replace(edit, frontCursor, head)
-
-            # return newPoint
-            #delete the tail 
-            # self.view.replace(edit, backCursor, " ")
-
-            #if we are going left, the cursor need to be adjusted
-            # if direction == "left":
-            #     cursorPos = self.view.text_point(curX , curY-1)
-            #     self.view.sel().clear()
-            #     self.view.sel().add(sublime.Region(cursorPos))
-            self._move_to(nextPos)
-            # self.view.run_command("move", {"by": lineOrChar,"forward": tof })
-            
-            # set the current position as previous one since we didn't hit a wall
-            gV['PP'] = curPos
-            gV['DIRECTION'] = direction
-
+        #     # set the current position as previous one since we didn't hit a wall
+        #     gV['PP'] = curPos
+        #     gV['DIRECTION'] = direction
+       
+        
     def _starting_at(self):
 
         return self.pos
@@ -103,4 +122,65 @@ class Player(object):
         self.view.sel().clear()
         self.view.sel().add(sublime.Region(pt))
 
+
+
+    def on_move_wrapper(self,_self,edit ,direction, head,lineOrChar, tof):
+        # for x in self:
+        #     print(self[x])         
+        #get current position   
+        cur_position = self.view.sel()[0]
+        curX,curY = self.view.rowcol(cur_position.begin())
+        curPos= cur_position.begin()
+
+        #get next position from direction
+        nextPos = self._next_point(direction, curX, curY)
+        # don't update the position if we hit a wall
+
+        if self.is_wall(nextPos):
+            print ("Face in Wall")
+            # keep cursor at same position and don't update anything         
+            self.view.sel().add(sublime.Region(curPos))
+
+        else:
+            
+            frontCursor = sublime.Region(curPos, curPos+1)
+            #move the head by 1
+            # self.view.replace(edit, frontCursor, head)
+            # self.view.run_command("replace_edit" ,{"pos":frontCursor, "length":10, "content":'>'})
+            with Edit(self.view) as edit:
+                edit.replace(frontCursor, head)
+                # edit.insert(0, 'more stuff\n')
+            # self.view.run_command("move", {  "by": "characters",  "forward": True  })
+            # self.view.run_command("r_edit")
+            #delete the tail 
+            # self.view.replace(edit, backCursor, " ")
+
+            self._move_to(nextPos)
+            print('test 1',frontCursor)
+            self.walked_on_something(nextPos)
+            # self.view.run_command("move", {"by": lineOrChar,"forward": tof })
+            
+            # set the current position as previous one since we didn't hit a wall
+            gV['PP'] = curPos
+            gV['DIRECTION'] = direction
+            #sublime.set_timeout(lambda:self.on_move_wrapper(self,edit ,direction, head,lineOrChar, tof) ,100)
+
         
+class CursorEditCommand(sublime_plugin.TextCommand):
+
+    def run(self, edit, pos,length,content):
+        reg = sublime.Region(pos, pos+length)
+        view = gV['View']
+        view.replace(edit, reg, content) 
+
+class ReditCommand(sublime_plugin.TextCommand):
+
+    def run(self, edit):
+
+        frontCursor = sublime.Region(3, 4)
+        view = gV['View']
+        view.replace(edit, frontCursor, 'T') 
+        print ('in redit')
+
+
+

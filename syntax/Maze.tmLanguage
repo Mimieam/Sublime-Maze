@@ -14,7 +14,7 @@
 			<key>comment</key>
 			<string>This pattern matches the walls of the maze</string>
 			<key>match</key>
-			<string>\[\]</string>
+			<string>[\[,\]]</string>
 			<key>name</key>
 			<string>entity.wall.mzl</string>
 		</dict>
@@ -30,7 +30,8 @@
 			<key>comment</key>
 			<string>This pattern matches the Start point of a maze</string>
 			<key>match</key>
-			<string>[ \u2123 ]</string>
+			<!-- <string>[ \u2123 ]</string> -->
+			<string>[ S ]</string>
 			<key>name</key>
 			<string>entity.startpt.mzl</string>
 		</dict>
@@ -38,7 +39,8 @@
 			<key>comment</key>
 			<string>This pattern matches the End point of a maze</string>
 			<key>match</key>
-			<string>[ \u2134 ]</string>
+			<!-- <string>[ \u2134 ]</string> -->
+			<string>[ \u25BC, E ]</string>
 			<key>name</key>
 			<string>entity.endpt.mzl</string>
 		</dict>
@@ -46,6 +48,6 @@
 	<key>scopeName</key>
 	<string>source.mzl</string>
 	<key>uuid</key>
-	<string>b6413f16-0aab-4084-8235-0c26d326f05f</string>
+	<string>43803c00-147b-40e2-b3b1-a7a0a9e5a445</string>
 </dict>
 </plist>
