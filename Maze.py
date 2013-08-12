@@ -134,8 +134,7 @@ class WalkerCommand(sublime_plugin.TextCommand):
                 seconds = 0
 
             #time constraint
-            # if minutes == 2 and seconds > 30 :
-            if seconds > 30 :
+            if minutes == 2 and seconds > 30 :
                 self.walker.gameOver()
                 
             sublime.set_timeout(lambda: self.timer(edit,seconds,minutes),1000)
