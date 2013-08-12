@@ -7,6 +7,23 @@
 	<key>settings</key>
 	<array>
 		<dict>
+			<key>settings</key>
+			<dict>
+				<key>background</key>
+				<string>#050505</string>
+				<key>caret</key>
+				<string>#050505</string>
+				<key>foreground</key>
+				<string>#BADA55</string>
+				<key>invisibles</key>
+				<string>#00000040</string>
+				<key>lineHighlight</key>
+				<string>#999999</string>
+				<key>selection</key>
+				<string>#444444</string>
+			</dict>
+		</dict>
+		<dict>
 			<key>name</key>
 			<string>Wall</string>
 			<key>scope</key>
@@ -14,9 +31,9 @@
 			<key>settings</key>
 			<dict>
 				<key>background</key>
-				<string>#171822</string>
+				<string>#039284</string>
 				<key>foreground</key>
-				<string>#686E6A</string>
+				<string>#039284</string>
 			</dict>
 		</dict>
 		<dict>
@@ -27,7 +44,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#686E6A</string>
+				<string>#BADA55</string>
 			</dict>
 		</dict>
 		<dict>
