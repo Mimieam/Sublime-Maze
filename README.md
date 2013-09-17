@@ -45,5 +45,5 @@ Don't hesitate to contact me with feedbacks or ideas, Thanks
 
 
 [logo]:  http://i.imgur.com/ixewzze.gif "Sublime-Maze" 
-[img]: http://i.imgur.com/dQ3eqIr.png "demo"
+[img]: http://imgur.com/5JLpnlh "demo"
 [alt text]: Sublime-Maze
