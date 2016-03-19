@@ -1,0 +1,11 @@
+[
+  { "keys": ["shift+alt+m"], "command": "walker" },
+
+  { "keys": ["left"], "command": "go_left_cmd" ,"context": [{ "key": "selector", "operator": "equal", "operand": "source.mzl" }]},
+  { "keys": ["right"], "command": "go_right_cmd" ,"context": [{ "key": "selector", "operator": "equal", "operand": "source.mzl" }]},
+  { "keys": ["up"], "command": "go_up_cmd","context": [{ "key": "selector", "operator": "equal", "operand": "source.mzl" }] },
+  { "keys": ["down"], "command": "go_down_cmd","context": [{ "key": "selector", "operator": "equal", "operand": "source.mzl" }] },
+  { "keys": ["<character>"], "command": " ","context": [{ "key": "selector", "operator": "equal", "operand": "source.mzl" }] },
+  { "keys": ["tab"], "command": " ","context": [{ "key": "selector", "operator": "equal", "operand": "source.mzl" }] },
+  { "keys": ["enter"], "command": " ","context": [{ "key": "selector", "operator": "equal", "operand": "source.mzl" }] }
+]

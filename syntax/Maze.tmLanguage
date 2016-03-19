@@ -39,8 +39,8 @@
 			<key>comment</key>
 			<string>This pattern matches the End point of a maze</string>
 			<key>match</key>
-			<!-- <string>[ \u2134 ]</string> -->
-			<string>[ \u25BC, E ]</string>
+			<string>[ \u2134 ]</string>
+			<!-- <string>[ \u25BC, E ]</string> -->
 			<key>name</key>
 			<string>entity.endpt.mzl</string>
 		</dict>
