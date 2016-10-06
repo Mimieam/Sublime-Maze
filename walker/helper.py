@@ -14,7 +14,7 @@ def reset():
 
     # keymap_file_reset = os.path.abspath(os.path.join(os.path.dirname(__file__),"..")) + '\\Default.sublime-keymap-reset'
     # print(keymap_file_reset ,  os.path.isfile(keymap_file_reset))
-    
+
     # if os.path.isfile(keymap_file_reset):
     #     try:
     #         base = os.path.splitext(keymap_file_reset)[0]
@@ -26,7 +26,8 @@ def reset():
     #reset file content of Default.sublime-keymap
     keymap_file = os.path.abspath(os.path.join(os.path.dirname(__file__),"..")) + '\\Default.sublime-keymap'
     if os.path.isfile(keymap_file):
+        print('Writting to ...:', keymap_file)
         f = open('keymap_file', 'w')
         f.write(config.keymap_maze)
-    
+
 

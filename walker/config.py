@@ -11,7 +11,7 @@ gV = {
     'G_RIGHT'	: u"\u25B6",
     'G_UP'		: u"\u25B2",
     'G_DOWN'	: u"\u25BC",
-    'PP'        : [0,0]
+    'PP'        : [1,1]
 }
 
 keymap_default = "[\

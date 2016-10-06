@@ -11,6 +11,7 @@ class ClientPlayer(Player):
     """docstring for ClientPlayer"""
     def __init__(self, view):
         super(ClientPlayer, self).__init__(view)
+        print('NEW STUFF !!!!')
         gV['Client'] = self
         self.score = gV['SCORE']
 
@@ -32,7 +33,7 @@ class ClientPlayer(Player):
         else :
             gV['Client'].on_move(edit,'down',gV['G_DOWN'],"lines", True)
 
-        # sublime.set_timeout(lambda: self.renderSteps(edit),500)
+        sublime.set_timeout(lambda: self.renderSteps(edit),500)
 
 
 

@@ -12,7 +12,7 @@ class Player(object):
     def __init__(self, view):
 
         self.view = view
-        self.pos = [1, 1]
+        self.pos = [2, 2]
         self.prev_pos = self.pos
         # self.lastCorrectPos
 
@@ -123,7 +123,7 @@ class Player(object):
             # set the current position as previous one since we didn't hit a wall
             gV['PP'] = curPos
             gV['DIRECTION'] = direction
-            #sublime.set_timeout(lambda:self.on_move_wrapper(self,edit ,direction, head,lineOrChar, tof) ,100)
+            # sublime.set_timeout(lambda:self.on_move_wrapper(self,edit ,direction, head,lineOrChar, tof) ,100)
 
 
 class CursorEditCommand(sublime_plugin.TextCommand):

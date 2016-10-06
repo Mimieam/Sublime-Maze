@@ -159,7 +159,6 @@ class WalkerCommand(sublime_plugin.TextCommand):
 
 
 class MazeListener(sublime_plugin.EventListener):
-
     def on_close(self, view):
         print("pre-closing clean up")
 
@@ -198,6 +197,15 @@ class MazeListener(sublime_plugin.EventListener):
                 f.write(config.keymap_maze)
                 f.close()
 
+    def on_text_command(self, view, command_name, args):
+        if (view == gV['View']):
+            # Oct-6-2016 - prevent cheating lol
+            # this listen for any mouse click on the .mzl file
+            # and send it to the void...
+            if command_name == 'drag_select':
+
+                print("Drag SELECT")
+                return ('Void','{"by": "lines", "forward": false}')
 
 # quick fix for this error when using self.view.replace - use  self.view.run_command("replace_edit" ,{} ) with params
 # raise ValueError("Edit objects may not be used after the TextCommand's run method has returned")
@@ -262,6 +270,10 @@ class MovedownCommand(sublime_plugin.TextCommand):
         if gV['WALKER_ON'] == False:
             self.view.run_command("move", {"by": "lines", "forward": True })
 
+# void command - redirect here any native sublime command we dont want to be triggered while playing
+class VoidCommand(sublime_plugin.TextCommand):
+    def run(self, edit):
+        print('You are in the void for clicking..')
 
 
 
