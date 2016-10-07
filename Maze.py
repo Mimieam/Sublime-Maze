@@ -37,7 +37,7 @@ class WalkerCommand(sublime_plugin.TextCommand):
         print('Start Walker', gV['WALKER_ON'])
 
         view = sublime.active_window().new_file()
-        view.set_scratch(True)
+        # view.set_scratch(True)
         view.set_name("Walk.mzl")
         self.view = gV['View'] = view
 
@@ -81,6 +81,7 @@ class WalkerCommand(sublime_plugin.TextCommand):
         # starting timer
         self.timer(edit, 0, 0)
        # add the starting point
+        print (self.walker.starting_at())
         xStart, yStart = self.walker.starting_at()
         print ("start ENd", xStart, yStart)
         self.draw_at(u"\u25C4", xStart, yStart)
@@ -89,11 +90,12 @@ class WalkerCommand(sublime_plugin.TextCommand):
         pt = view.text_point(xStart, yStart)
         print ("pt: ", pt, xStart, yStart)
         view.sel().clear()
-        view.sel().add(sublime.Region(248))
+        view.sel().add(sublime.Region(pt))
+        # view.sel().add(sublime.Region(248))
 
         # start the rendering function - this function makes the char walk
         # alone.
-        sublime.set_timeout(lambda:self.walker.renderSteps(edit),500)
+        # sublime.set_timeout_async(lambda:self.walker.renderSteps(edit),500)
 
     def animate(self, view, edit, head, pos, length):
 
@@ -116,7 +118,7 @@ class WalkerCommand(sublime_plugin.TextCommand):
 
     def timer(self, edit, _sec, _min):
         if gV['WALKER_ON']:
-            print('walker_on', gV['WALKER_ON'])
+            # print('walker_on', gV['WALKER_ON'])
             seconds = _sec
             minutes = _min
 
@@ -182,6 +184,7 @@ class MazeListener(sublime_plugin.EventListener):
         if os.path.isfile(keymap_file):
             rst = open(reset_file, 'r')
             f = open(keymap_file, 'w')
+            print("Writing key binding file....", keymap_file)
             f.write(rst.read())
             rst.close()
             f.close()
@@ -202,7 +205,7 @@ class MazeListener(sublime_plugin.EventListener):
             # Oct-6-2016 - prevent cheating lol
             # this listen for any mouse click on the .mzl file
             # and send it to the void...
-            if command_name == 'drag_select':
+            if command_name == 'drag_select' or command_name == 'left_delete' or    command_name == 'insert_best_completion':
 
                 print("Drag SELECT")
                 return ('Void','{"by": "lines", "forward": false}')
@@ -229,7 +232,7 @@ class MoverightCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         gV['INTENDED_DIRECTION'] = 'right'
         if 'Client' in gV and gV['WALKER_ON'] == True:
-            # print ('right Key pressed', gV['INTENDED_DIRECTION'])
+            print ('right Key pressed', gV['INTENDED_DIRECTION'])
             gV['Client'].on_move(edit,'right',gV['G_RIGHT'] ,"characters", True)
 
         if gV['WALKER_ON'] == False:
@@ -240,7 +243,7 @@ class MoveleftCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         gV['INTENDED_DIRECTION'] = 'left'
         if 'Client' in gV and gV['WALKER_ON'] == True:
-            # print ('left Key pressed', gV['INTENDED_DIRECTION'])
+            print ('left Key pressed', gV['INTENDED_DIRECTION'])
             gV['Client'].on_move(edit,'left',gV['G_LEFT'],"characters", False)
 
         if gV['WALKER_ON'] == False:

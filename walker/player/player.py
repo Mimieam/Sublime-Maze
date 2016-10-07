@@ -5,16 +5,14 @@ from Walker.edit import Edit
 
 import Walker.walker.config
 gV = Walker.walker.config.gV
-# from Walker.Maze import on_move_wrapper
 
 class Player(object):
     """docstring for Player"""
     def __init__(self, view):
 
         self.view = view
-        self.pos = [2, 2]
+        self.pos = [2, 3]
         self.prev_pos = self.pos
-        # self.lastCorrectPos
 
     def run(self, view):
         self.__init__(view)
@@ -137,7 +135,7 @@ class ReditCommand(sublime_plugin.TextCommand):
 
     def run(self, edit):
 
-        frontCursor = sublime.Region(3, 4)
+        frontCursor = sublime.Region(2, 2)
         view = gV['View']
         view.replace(edit, frontCursor, 'T')
         print ('in redit')
