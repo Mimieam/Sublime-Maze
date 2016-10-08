@@ -58,7 +58,8 @@ class Player(object):
 
     def gameOver(self):
 
-        sublime.error_message("Your SCORE was: " + str(gV['SCORE']))
+        # sublime.error_message("Your SCORE was: " + str(gV['SCORE']))
+        sublime.message_dialog("Your SCORE was: " + str(gV['SCORE'] +" Steps"))
         gV['WALKER_ON'] = False
 
 
@@ -122,23 +123,3 @@ class Player(object):
             gV['PP'] = curPos
             gV['DIRECTION'] = direction
             # sublime.set_timeout(lambda:self.on_move_wrapper(self,edit ,direction, head,lineOrChar, tof) ,100)
-
-
-class CursorEditCommand(sublime_plugin.TextCommand):
-
-    def run(self, edit, pos,length,content):
-        reg = sublime.Region(pos, pos+length)
-        view = gV['View']
-        view.replace(edit, reg, content)
-
-class ReditCommand(sublime_plugin.TextCommand):
-
-    def run(self, edit):
-
-        frontCursor = sublime.Region(2, 2)
-        view = gV['View']
-        view.replace(edit, frontCursor, 'T')
-        print ('in redit')
-
-
-

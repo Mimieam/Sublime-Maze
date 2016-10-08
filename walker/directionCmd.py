@@ -23,7 +23,7 @@ class ClientPlayer(Player):
 
     def renderSteps(self,edit):
 
-        # print("INTENDED_DIRECTION = ", gV['INTENDED_DIRECTION'])
+        print("INTENDED_DIRECTION = ", gV['INTENDED_DIRECTION'])
         if gV['INTENDED_DIRECTION'] == 'right':
             gV['Client'].on_move(edit,'right',gV['G_RIGHT'] ,"characters", True)
         elif gV['INTENDED_DIRECTION'] == 'left':
@@ -33,7 +33,7 @@ class ClientPlayer(Player):
         else :
             gV['Client'].on_move(edit,'down',gV['G_DOWN'],"lines", True)
 
-        # sublime.set_timeout(lambda: self.renderSteps(edit),500)
+        sublime.set_timeout(lambda: self.renderSteps(edit),500)
 
 
 
