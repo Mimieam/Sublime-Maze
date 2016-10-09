@@ -53,7 +53,8 @@ class ClientPlayer(Player):
         else :
             gV['Client'].on_move(edit,'down',gV['G_DOWN'],"lines", True)
 
-        # sublime.set_timeout(lambda: self.renderSteps(edit),500)
+        if gV['AUTO_WALK']:
+            sublime.set_timeout(lambda: self.renderSteps(edit),250)
 
 
 

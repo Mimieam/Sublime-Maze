@@ -59,7 +59,7 @@ class Player(object):
     def gameOver(self):
 
         # sublime.error_message("Your SCORE was: " + str(gV['SCORE']))
-        sublime.message_dialog("Your SCORE was: " + str(gV['SCORE'] +" Steps"))
+        sublime.message_dialog("Your SCORE was: " + str(gV['SCORE']) + " Steps")
         gV['WALKER_ON'] = False
 
 

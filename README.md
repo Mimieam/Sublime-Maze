@@ -20,7 +20,7 @@ git clone https://github.com/Mimieam/Sublime-Maze.git
 
 To start the maze :
 
-  Step 1: Open a new Tab (Important!)
+  Step 1: Open a new Window not just a Tab (**Important!** - your key binding will not work correctly in the window in which the game is lunched)
 
   Step 2: Go to `Tool>Command Palette` and select `Maze Game: Start`
 or use the shortcut `[SHIFT]+[ALT]+[M]`
@@ -29,12 +29,12 @@ or use the shortcut `[SHIFT]+[ALT]+[M]`
 ![alt text][img]
 
 ## Future Improvement
- - add some coloring
+ - add some coloring (done)
  - add maze generator (done)
- - persistent scoring
- - timer
+ - persistent scoring (abandonned)
+ - timer (done)
  - things to pick up for extra points
- - multiplayer race mode... in a long distant future
+ - multiplayer race mode... in a long distant future (The future is here... and for performance reason the development of this feature was stopped - maintaining live rooms was slowing down sublime drastically :/ )
 
 
 ## Acknowledgments
