@@ -9,7 +9,6 @@ from imp import reload
 from Walker.walker.maze import makeMaze, mazeString
 # import Walker.walker.player as player
 import Walker.walker.config as config
-import Walker.walker.helper as helper
 from Walker.edit import Edit
 
 
